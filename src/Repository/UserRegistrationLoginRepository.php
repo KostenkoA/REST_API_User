@@ -19,6 +19,17 @@ class UserRegistrationLoginRepository extends ServiceEntityRepository
         parent::__construct($registry, UserRegistrationLogin::class);
     }
 
+    public function findAllUsersByDate($date)
+    {
+       return $this->createQueryBuilder('p')
+            ->select('p.userId')
+            ->where("DATE('$date')")
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
+
 //    /**
 //     * @return UserRegistrationLoginController[] Returns an array of UserRegistrationLoginController objects
 //     */

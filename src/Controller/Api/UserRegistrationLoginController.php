@@ -29,4 +29,23 @@ class UserRegistrationLoginController extends FOSRestController
 
         return $this->view($loginRegistration, Response::HTTP_CREATED);
     }
+
+    /**
+     * @return View
+     *
+     * @Rest\Get("/login-registration/{date}")
+     */
+    public function getAllUsersId($date)
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(UserRegistrationLogin::class)
+            ->findAllUsersByDate($date);//TODO
+        ;
+
+        if (empty($user)){
+            throw $this->createNotFoundException('Resource on that date -  not found!');
+        }
+
+        return $this->view($user, Response::HTTP_OK);
+    }
 }
