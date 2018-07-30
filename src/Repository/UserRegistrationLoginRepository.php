@@ -26,7 +26,8 @@ class UserRegistrationLoginRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->select('p.userId')
             ->where('p.lastLoginAt <= :date')
-           ->setParameter(':date', $date->format('Y-m-d'))
+           ->setParameter(':date', $date->format('Y-m-d H:i:s'))
+            ->distinct()
             ->getQuery()
             ->getResult()
         ;
