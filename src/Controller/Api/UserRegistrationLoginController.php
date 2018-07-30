@@ -39,7 +39,7 @@ class UserRegistrationLoginController extends FOSRestController
     {
         $user = $this->getDoctrine()
             ->getRepository(UserRegistrationLogin::class)
-            ->findAllUsersByDate($date);//TODO
+            ->findAllUsersByDate($date);
         ;
 
         if (empty($user)){

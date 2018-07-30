@@ -21,9 +21,12 @@ class UserRegistrationLoginRepository extends ServiceEntityRepository
 
     public function findAllUsersByDate($date)
     {
-       return $this->createQueryBuilder('p')
+       $date = new \DateTime($date);
+
+        return $this->createQueryBuilder('p')
             ->select('p.userId')
-            ->where("DATE('$date')")
+            ->where('p.lastLoginAt <= :date')
+           ->setParameter(':date', $date->format('Y-m-d'))
             ->getQuery()
             ->getResult()
         ;
